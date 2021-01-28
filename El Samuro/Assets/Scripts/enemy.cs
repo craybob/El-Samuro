@@ -4,20 +4,42 @@ using UnityEngine;
 
 public class enemy : MonoBehaviour
 {
-    public float minTime;
-    public float maxTime;
+    public int minTime;
+    public int maxTime;
     public float typeOfEnemy;
+    public bool alive = true;
+    player playerScript;
+    [HideInInspector]
+    public enemy_spawn spawnScript;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+
+
+        if (alive == false)
+        {
+            spawnScript = FindObjectOfType<enemy_spawn>().GetComponent<enemy_spawn>();
+            spawnScript.time2spawn();
+            Destroy(gameObject);
+        }
+    }
+
+
+    public void enemyAttack()
+    {
+        int time2attack = Random.Range(minTime,maxTime);
+        Invoke("attack", time2attack);
+    }
+
+    void attack()
+    {
+        playerScript = FindObjectOfType<player>().GetComponent<player>();
+        transform.position = new Vector2(-1.2f, -0.01f);
+        playerScript.destroy();
+        if (playerScript == null)
+        {
+            transform.position = transform.position;
+        }
     }
 }
