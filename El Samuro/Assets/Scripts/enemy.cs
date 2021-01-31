@@ -11,6 +11,7 @@ public class enemy : MonoBehaviour
     player playerScript;
     [HideInInspector]
     public enemy_spawn spawnScript;
+    game_manager manager_script;
 
 
     void Update()
@@ -21,6 +22,9 @@ public class enemy : MonoBehaviour
         {
             spawnScript = FindObjectOfType<enemy_spawn>().GetComponent<enemy_spawn>();
             spawnScript.time2spawn();
+
+            manager_script = FindObjectOfType<game_manager>().GetComponent<game_manager>();
+            manager_script.switchOff();
             Destroy(gameObject);
         }
     }
@@ -39,7 +43,7 @@ public class enemy : MonoBehaviour
         playerScript.destroy();
         if (playerScript == null)
         {
-            transform.position = transform.position;
+            // исправление ошибки с отсутсвием игрока
         }
     }
 }

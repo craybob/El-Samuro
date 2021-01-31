@@ -14,7 +14,7 @@ public class player : MonoBehaviour
 
     public bool killed = false;
     public Transform kill_position;
-    public enemy enemy_script = FindObjectOfType<enemy>().GetComponent<enemy>();
+    public enemy enemy_script;
 
     // Start is called before the first frame update
     void Start()

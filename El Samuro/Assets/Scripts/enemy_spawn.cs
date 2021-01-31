@@ -24,7 +24,7 @@ public class enemy_spawn : MonoBehaviour
 
     public void time2spawn()
     {
-        Invoke("spawnEnemy", 0.5f);
+        Invoke("spawnEnemy", 0.9f);
     }
 
     void spawnEnemy()
