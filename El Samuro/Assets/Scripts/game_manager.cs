@@ -10,7 +10,7 @@ public class game_manager : MonoBehaviour
     public Animator transition_anim;
     public GameObject transition;
 
-    public GameObject gameOverPanel;
+    public GameObject gameOverPanel = null;
 
     public Transform player_script;
     // Start is called before the first frame update
@@ -29,18 +29,7 @@ public class game_manager : MonoBehaviour
         }
     }
 
-    void gameOverMenu()
-    {
-        SceneManager.LoadScene(0);
-        gameOverPanel.SetActive(true);
-    }
-
-    public void replayScene()
-    {
-        SceneManager.LoadScene(0);
-    }
-    
-    // transition To next LVL
+// transition To next LVL
     public void switchOff()
     {
         transition_anim.SetBool("light", false);
@@ -51,6 +40,22 @@ public class game_manager : MonoBehaviour
     {
         player_script.position = new Vector3(-0.9f, -0.01f, 0f);
         transition_anim.SetBool("light", true);
+    }
+
+    //GAMEOVER MENU
+    void gameOverMenu()
+    {
+        gameOverPanel.SetActive(true);
+    }
+
+    public void replayScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+    
+    public void main_menu_button()
+    {
+        SceneManager.LoadScene(0);
     }
 
 
