@@ -13,23 +13,32 @@ public class game_manager : MonoBehaviour
     public GameObject gameOverPanel = null;
 
     public Transform player_script;
+    public bool player_alive = true;
+
+    public AudioClip[] game_music;
+    public AudioSource musicSource;
     // Start is called before the first frame update
     void Start()
     {
         transition_anim.SetBool("light", true);
     }
 
+    void Awake()
+    {
+        musicSource.clip = game_music[0];
+        musicSource.Play();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        playerScript = FindObjectOfType<player>();
-        if (playerScript == null)
+        if (player_alive == false)
         {
             gameOverMenu();
         }
     }
 
-// transition To next LVL
+    // transition To next LVL
     public void switchOff()
     {
         transition_anim.SetBool("light", false);

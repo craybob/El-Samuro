@@ -8,11 +8,21 @@ public class enemy : MonoBehaviour
     public int maxTime;
     public float typeOfEnemy;
     public bool alive = true;
-    player playerScript;
     [HideInInspector]
+    public player playerScript;
     public enemy_spawn spawnScript;
     game_manager manager_script;
 
+
+    private void Awake()
+    {
+        playerScript = FindObjectOfType<player>().GetComponent<player>();
+        playerScript.enemyDetect();
+
+
+        spawnScript = FindObjectOfType<enemy_spawn>().GetComponent<enemy_spawn>();
+        manager_script = FindObjectOfType<game_manager>().GetComponent<game_manager>();
+    }
 
     void Update()
     {
@@ -20,10 +30,8 @@ public class enemy : MonoBehaviour
 
         if (alive == false)
         {
-            spawnScript = FindObjectOfType<enemy_spawn>().GetComponent<enemy_spawn>();
             spawnScript.time2spawn();
 
-            manager_script = FindObjectOfType<game_manager>().GetComponent<game_manager>();
             manager_script.switchOff();
             Destroy(gameObject);
         }
@@ -38,12 +46,8 @@ public class enemy : MonoBehaviour
 
     void attack()
     {
-        playerScript = FindObjectOfType<player>().GetComponent<player>();
+        
         transform.position = new Vector2(-1.2f, -0.01f);
         playerScript.destroy();
-        if (playerScript == null)
-        {
-            // исправление ошибки с отсутсвием игрока
-        }
     }
 }
